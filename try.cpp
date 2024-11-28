@@ -1,54 +1,39 @@
 #include <bits/stdc++.h>
 using namespace std;
+#define int long long
+#define vi vector<int>
+#define pb push_back
+#define f(i, a, b) for (int i = a; i < b; i++)
+#define read(a, n) f(i, 0, n) cin >> a[i];
 
-int main()
+int32_t main()
 {
+    ios::sync_with_stdio(0);
+    cin.tie(0);
+
     int t;
     cin >> t;
-    cin.ignore(); // Discard the leftover newline after reading t
-    while (t--)
-    {
-        string largeString;
-        getline(cin, largeString);
+    while (t--) {
+        int n;
+        cin >> n;
+        n--;
+        vi v(n);
+        read(v, n);
 
-        // Ensure the input is valid
-        if (largeString.size() < 3)
-        {
-            cout << "Invalid input!" << endl;
-            continue;
+        vi result;
+        f(i, 0, n-1) {
+            int half1 = v[i] / 2;
+            int half2 = v[i] - half1;
+            result.pb(half1);
+            result.pb(half2);
         }
-
-        char a = largeString[0];
-        char ch = largeString[1];
-        char b = largeString[2];
-
-        if (ch == '=')
-        {
-            if (a == b){
-                cout << a << ch << b << endl;
-            }
-            else{
-                cout << a << ch <<a << endl;
-            }
+        if(n%2==0){
+            result.pb(v[n-1]-result[n-1]);
         }
-        else if (ch == '>')
-        {
-            if (a > b){
-                cout << a << ch << b << endl;
-            }
-            else{
-                cout << a << "<" << b << endl;
-            }
+        for (int x : result) {
+            cout << x << " ";
         }
-        else
-        {
-            if (a < b){
-                cout << a << ch << b << endl;
-            }
-            else{
-                cout << a << ">" << b << endl;
-            }
-        }
+        cout << endl;
     }
     return 0;
 }
