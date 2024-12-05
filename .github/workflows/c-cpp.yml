@@ -23,7 +23,7 @@ jobs:
 
     # Step 3: Compile the C++ code
     - name: Compile C++ code
-      run: g++ -o main main.cpp -std=c++17
+      run: g++ -o main BitStrings.cpp -std=c++17
 
     # Step 4: Run the program with sample inputs
     - name: Test with sample inputs
