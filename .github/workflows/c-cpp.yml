@@ -1,0 +1,39 @@
+name: C++ CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up C++ build environment
+    - name: Setup C++ environment
+      run: sudo apt-get update && sudo apt-get install -y g++
+
+    # Step 3: Compile the C++ code
+    - name: Compile C++ code
+      run: g++ -o main main.cpp -std=c++17
+
+    # Step 4: Run the program with sample inputs
+    - name: Test with sample inputs
+      run: |
+        echo "5" | ./main > output.txt
+        cat output.txt
+        echo "Expected output: 32"
+
+    # Step 5: Validate the output
+    - name: Validate output
+      run: |
+        echo "32" > expected_output.txt
+        diff -q output.txt expected_output.txt
