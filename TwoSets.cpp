@@ -11,7 +11,7 @@ int32_t main()
     ios::sync_with_stdio(0);
     cin.tie(0);
 
-    int n, i;
+    int n;
     cin >> n;
     if ((n * (n + 1) / 2) % 2 != 0)
     {
@@ -24,27 +24,27 @@ int32_t main()
         vi vl;
         if (n % 2 == 0)
         {
-            f(i, 1, n / 2)
+            f(i, 0, n / 2)
             {
                 if (i % 2 == 0)
                 {
-                    vs.pb(i+1);
-                    vs.pb(n - i-1);
+                    vs.pb(1+i);
+                    vs.pb(n-i);
                 }
                 else
                 {
                     vl.pb(i+1);
-                    vl.pb(n - i-1);
+                    vl.pb(n - i);
                 }
             }
         }else{
-            f(i, 1, (n-1) / 2 + 1){
+            f(i, 0, (n-1) / 2 ){
                 if (i % 2 == 0){
                     vs.pb(i+1);
-                    vs.pb(n - i);
+                    vs.pb(n - i-1);
                 }else{
                     vl.pb(i+1);
-                    vl.pb(n - i);
+                    vl.pb(n - i-1);
                 }
             }
             if(vl.size()>vs.size()){

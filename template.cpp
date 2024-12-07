@@ -5,7 +5,9 @@ using namespace std;
 #define pb push_back
 #define f(i, a, b) for (int i = a; i < b; i++)
 #define read(a, n) f(i, 0, n) cin >> a[i];
-
+#define sort(v) sort(v.begin(), v.end());
+#define all(v) v.begin(), v.end()
+#define iseven (x) (x&1) ? 0 : 1
 int32_t main()
 {
     ios::sync_with_stdio(0);
@@ -14,22 +16,7 @@ int32_t main()
     int t;
     cin >> t;
     while (t--) {
-        int n;
-        cin >> n;
-        vi a(n);
-        read(a, n);
-        sort(a.begin(),a.end());
-        int cnt=0;
-        f(i,1,n-1){
-            if(a[i-1]-a[i]<=a[i+1]-a[i]&&a[i+1]-a[i]>0){
-                cnt++;
-            }
-        }
-        if(cnt==n-2){
-            cout << "YES\n";
-        }else{
-            cout << "NO\n";
-        }
+        
+        
     }
-    return 0;
 }
