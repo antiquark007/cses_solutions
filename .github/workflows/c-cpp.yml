@@ -1,0 +1,60 @@
+name: C++ CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    # Step 1: Checkout the code
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # Step 2: Set up C++ build environment
+    - name: Setup C++ environment
+      run: sudo apt-get update && sudo apt-get install -y g++
+
+    # Step 3: Compile the C++ code
+    - name: Compile C++ code
+      run: g++ -o main BitStrings.cpp -std=c++17
+
+    # Step 4: Run the program with sample inputs
+    # Step 4: Run the program with multiple test cases
+    - name: Run test cases
+      run: |
+        # Test case 1
+        echo "5" | ./main > output1.txt
+        echo "32" > expected_output1.txt
+        diff -q output1.txt expected_output1.txt || (echo "Test case 1 failed" && exit 1)
+
+        # Test case 2
+        echo "10" | ./main > output2.txt
+        echo "1024" > expected_output2.txt
+        diff -q output2.txt expected_output2.txt || (echo "Test case 2 failed" && exit 1)
+
+        # Test case 3
+        echo "20" | ./main > output3.txt
+        echo "1048576" > expected_output3.txt
+        diff -q output3.txt expected_output3.txt || (echo "Test case 3 failed" && exit 1)
+
+        # Test case 4
+        echo "50" | ./main > output4.txt
+        echo "898961331" > expected_output4.txt
+        diff -q output4.txt expected_output4.txt || (echo "Test case 4 failed" && exit 1)
+
+        # Test case 5 (Edge case)
+        echo "1" | ./main > output5.txt
+        echo "2" > expected_output5.txt
+        diff -q output5.txt expected_output5.txt || (echo "Test case 5 failed" && exit 1)
+
+    # Step 5: Report success
+    - name: Test successful
+      if: success()
+      run: echo "All test cases passed!"
