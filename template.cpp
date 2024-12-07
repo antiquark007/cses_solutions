@@ -16,24 +16,20 @@ int32_t main()
     while (t--) {
         int n;
         cin >> n;
-        n--;
-        vi v(n);
-        read(v, n);
-
-        vi result;
-        f(i, 0, n-1) {
-            int half1 = v[i] / 2;
-            int half2 = v[i] - half1;
-            result.pb(half1);
-            result.pb(half2);
+        vi a(n);
+        read(a, n);
+        sort(a.begin(),a.end());
+        int cnt=0;
+        f(i,1,n-1){
+            if(a[i-1]-a[i]<=a[i+1]-a[i]&&a[i+1]-a[i]>0){
+                cnt++;
+            }
         }
-        if(n%2==0){
-            result.pb(v[n-1]-result[n-1]);
+        if(cnt==n-2){
+            cout << "YES\n";
+        }else{
+            cout << "NO\n";
         }
-        for (int x : result) {
-            cout << x << " ";
-        }
-        cout << endl;
     }
     return 0;
 }

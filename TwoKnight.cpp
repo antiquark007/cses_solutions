@@ -11,6 +11,10 @@ int32_t main()
     ios::sync_with_stdio(0);
     cin.tie(0);
 
-    int n;
-    cin >> n;
+    int k,i;
+    cin >> k;
+    f(i,1,k+1){
+        cout<<i*i*(i*i-1)/2-4*(i-1)*(i-2)<<endl;
+    }
+    return 0;
 }
