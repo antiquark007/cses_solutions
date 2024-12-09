@@ -16,7 +16,29 @@ int32_t main()
     int t;
     cin >> t;
     while (t--) {
-        
-        
+        int n ,k,j;
+        cin>>n>>k;
+        vi v(n);
+        read(v,n);
+        int  flag=0;
+        f(i,0,n){
+            f(j,0,n){
+                if(i==j){
+                    continue;
+                }else{
+                    if(abs(v[i]-v[j])%k!=0){
+                        flag=0;
+                        break;
+                    }
+                }
+
+            }
+        }
+        if(flag){
+            cout<<"YES"<<endl;
+        }
+        else{
+            cout<<"NO"<<endl;
+        }
     }
 }
