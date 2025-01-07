@@ -6,35 +6,38 @@ using namespace std;
 #define f(i, a, b) for (int i = a; i < b; i++)
 #define read(a, n) f(i, 0, n) cin >> a[i]
 #define all(v) v.begin(), v.end()
-#define isEven(x) ((x % 2 == 0) ? 1 : 0)
 #define sumAll(v) accumulate(v.begin(), v.end(), 0)
 #define SORT(v) sort(v.begin(), v.end())
+
+bool canCompleteTasks(const vi &v, int n, int t, int time) {
+    int tasks = 0;
+    for (int i = 0; i < n; i++) {
+        tasks += time / v[i];
+        if (tasks >= t) return true; // No need to compute further
+    }
+    return tasks >= t;
+}
+
 void solve() {
-    // Add problem-specific logic here
-    int n,t;
-    cin >> n>>t;
+    int n, t;
+    cin >> n >> t;
     vi v(n);
     read(v, n);
-    int flag=1,tim=1;
     SORT(v);
 
-    while(flag){
-        
-    // int pdt=0;
-    //     for(int i=0;i<n;i++){
-    //         if(tim/v[i]<0)
-    //             break;
-    //         else{
-    //             pdt+=tim/v[i];
-    //         }
-    //     }
-    //     if(pdt>=t){
-    //         cout<<tim<<endl;
-    //         flag=0;
-    //     }
-    //     tim++;
+    int left = 1, right = v[0] * t, result = right;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if (canCompleteTasks(v, n, t, mid)) {
+            result = mid;
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
     }
+    cout << result << endl;
 }
+
 int32_t main() {
     ios::sync_with_stdio(0);
     cin.tie(0);
