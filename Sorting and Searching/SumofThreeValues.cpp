@@ -20,41 +20,35 @@ int32_t main()
     cin >> n >> x;
     vi a(n);
     read(a, n);
-    vi b(a);
-    // will try two pointer approach
-    SORT(b);
-    int l = 0, r = n - 1;
-    int val1 = 0, val2 = 0,v1=0;
-    int flag = 1;
-    for (int i = 0; i < n-2; i++)
-    {
-        v1 = b[i];
-        l = i;
-        while (l < r)
-        {
-            if (v1+b[l] + b[r] == x)
-            {
-                val1 = b[l];
-                val2 = b[r];
-                flag = 0;
-                break;
+
+    // Store the original indices
+    vector<pair<int, int>> b;
+    for (int i = 0; i < n; i++) {
+        b.pb({a[i], i + 1}); // store 1-based index
+    }
+
+    // Sort based on values
+    sort(all(b));
+
+    for (int i = 0; i < n - 2; i++) {
+        int v1 = b[i].first; // current element
+        int l = i + 1, r = n - 1;
+
+        while (l < r) {
+            int sum = v1 + b[l].first + b[r].first;
+            if (sum == x) {
+                cout << b[i].second << " " << b[l].second << " " << b[r].second;
+                return 0;
             }
-            else if (v1+b[l] + b[r] < x)
-            {
+            else if (sum < x) {
                 l++;
             }
-            else
-            {
+            else {
                 r--;
             }
         }
     }
-    if (flag)
-    {
-        cout << "IMPOSSIBLE";
-    }
-    else
-    {
-        cout << v1 << " " << val1<<" "<<v1;
-    }
+
+    cout << "IMPOSSIBLE";
+    return 0;
 }
