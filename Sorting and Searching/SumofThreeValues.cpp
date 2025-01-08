@@ -21,17 +21,14 @@ int32_t main()
     vi a(n);
     read(a, n);
 
-    // Store the original indices
     vector<pair<int, int>> b;
     for (int i = 0; i < n; i++) {
-        b.pb({a[i], i + 1}); // store 1-based index
+        b.pb({a[i], i + 1}); 
     }
-
-    // Sort based on values
     sort(all(b));
 
     for (int i = 0; i < n - 2; i++) {
-        int v1 = b[i].first; // current element
+        int v1 = b[i].first;
         int l = i + 1, r = n - 1;
 
         while (l < r) {
